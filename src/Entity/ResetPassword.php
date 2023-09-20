@@ -6,6 +6,7 @@ use App\Repository\ResetPasswordRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ResetPasswordRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class ResetPassword
 {
     #[ORM\Id]
@@ -25,11 +26,6 @@ class ResetPassword
 
     #[ORM\Column]
     private ?\DateTimeImmutable $limitedAt = null;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-    }
 
     public function getId(): ?int
     {
@@ -82,5 +78,11 @@ class ResetPassword
         $this->limitedAt = $limitedAt;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
     }
 }
