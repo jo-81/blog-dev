@@ -7,6 +7,9 @@
 
     <header class="mb-3">
         <h1 class="h3 mb-0 fw-bold text-uppercase">Blog</h1>
+        {% if category is defined and category is not null %}
+        <p class="mb-0">Catégorie : <span class="fw-bold" style="color: {{ category.color }}">{{ category.name }}</span></p>
+        {% endif %}
     </header>
 
     {% if posts.items is defined and posts.items is not empty %}
@@ -16,8 +19,13 @@
                     <article class="card card--hover border-0 shadow-sm">
                         <div class="card-body pb-0">
                             <div class="border-bottom pb-3">
-                                {% for category in post.categories %}
-                                    <a href="#" class="small badge-category" style="color: {{ category.color }}">{{ category.name }}</a>
+                                {% for c in post.categories %}
+                                    <a 
+                                        href="{{ path('post.list.category', {slug: c.slug}) }}" 
+                                        class="{{ html_classes("small badge-category", {
+                                            "text-decoration-underline fw-bold": category == c
+                                        }) }}" 
+                                        style="color: {{ c.color }}">{{ c.name }}</a>
                                     {% if loop.last == false %}
                                     <span class="small">/</span>
                                     {% endif %}
