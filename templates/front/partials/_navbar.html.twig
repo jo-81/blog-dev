@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
     <div class="container">
-        <img width="75px" height="75px" src="{{ asset('images/logo.png') }}" alt="">
+        <a href="{{ path('homepage') }}">
+            <img width="75px" height="75px" src="{{ asset('images/logo.png') }}" alt="">
+        </a>
 
         <button 
             class="navbar-toggler" 
@@ -15,7 +17,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                
+                <li class="nav-item">
+                    <a class="{{ html_classes("nav-link", {
+                        "active": 'blog' in app.request.requestUri
+                    }) }}" href="{{ path('post.list') }}">Blog</a>
+                </li>
             </ul>
         </div>
 
