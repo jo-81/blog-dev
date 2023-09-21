@@ -1,1 +1,39 @@
+@import "./variables";
 @import "~bootstrap/scss/bootstrap";
+
+.card-header, .card-footer {
+    --bs-card-cap-bg: white;
+    --bs-card-border-width: 0;
+}
+
+.card--hover {
+    transition: box-shadow 0.2s;
+    &:hover {
+        box-shadow: 0 .5rem 1rem rgba($black, .15) !important;
+    }
+}
+
+.badge-category {
+    transition: opacity 0.2s;
+    &:hover {
+        opacity: 0.75;
+    }
+}
+
+.pagination {
+    .page-item.disabled{
+        display: none;
+    }
+
+    .page-item {
+        margin-right: 0.5rem;
+
+        &.active {
+            box-shadow: 0 .5rem 1rem rgba($black, .075) !important;
+        }
+    }
+
+    .page-link {
+        border-radius: 0.25rem;
+    }
+}
