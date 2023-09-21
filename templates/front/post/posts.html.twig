@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog | {{ parent() }}{% endblock %}
+
+{% block body %}
+<section class="container my-5">
+
+    <header class="mb-3">
+        <h1 class="h3 mb-0 fw-bold text-uppercase">Blog</h1>
+    </header>
+
+    {% if posts.items is defined and posts.items is not empty %}
+        <div class="row g-3">
+            {% for post in posts %}
+                <div class="col-12 col-lg-6 col-xl-4">
+                    <article class="card card--hover border-0 shadow-sm">
+                        <div class="card-body pb-0">
+                            <div class="border-bottom pb-3">
+                                {% for category in post.categories %}
+                                    <a href="#" class="small badge-category" style="color: {{ category.color }}">{{ category.name }}</a>
+                                    {% if loop.last == false %}
+                                    <span class="small">/</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <header class="card-header pb-2">
+                            <h2 class="h5 fw-bold mb-0">{{ post.title }}</h2>
+                            <p class="mb-0 text-muted small">{{ post.createdAt | format_datetime('full', 'none', locale='fr') | capitalize }}</p>
+                        </header>
+
+                        <div class="card-body py-0">
+                            {{ post.chapo }}
+                        </div>
+
+                        <footer class="card-footer">
+                            <a class="btn btn-outline-secondary text-uppercase border-0" href="#">lire l'article</a>
+                        </footer>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-4">
+            {{ knp_pagination_render(posts) }}
+        </div>
+
+        {% else %} <p>Aucun article de trouvé</p>
+
+    {% endif %}
+
+</section>
+{% endblock %}
