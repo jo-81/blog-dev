@@ -34,4 +34,19 @@ class PostRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findByCategories(Post $post): mixed
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.categories', 'c')
+            ->where('c.id IN (:val)')
+            ->setParameter('val', $post->getCategories()->toArray())
+            ->orderBy('p.id', 'ASC')
+            ->andWhere('p.published = true')
+            ->andWhere('p.id != '.$post->getId())
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

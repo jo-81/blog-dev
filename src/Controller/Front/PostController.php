@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\Category;
+use App\Entity\Post;
 use App\Repository\PostRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +33,15 @@ class PostController extends AbstractController
         return $this->render('front/post/posts.html.twig', [
             'posts' => $posts,
             'category' => null,
+        ]);
+    }
+
+    #[Route('/blog/{slug}', name: 'post.single')]
+    public function postShow(Post $post): Response
+    {
+        return $this->render('front/post/post.html.twig', [
+            'post' => $post,
+            'postsSameCategory' => $this->postRepository->findByCategories($post),
         ]);
     }
 

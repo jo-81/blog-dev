@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+<section class="container my-5">
+
+    <header class="mb-3">
+        <h1 class="h3 mb-0 fw-bold text-uppercase">{{ post.title }}</h1>
+    </header>
+
+    <div class="row">
+        <section class="col-12 col-lg-7 mb-4">
+            <div class="fst-italic mb-3">
+                {{ post.content }}
+            </div>
+
+            <div>
+                {{ post.content }}
+            </div>
+        </section>
+
+        <aside class="col-12 col-lg-4 offset-lg-1">
+            <div class="bg-light p-4 rounded-4">
+                <div class="mb-3">
+                    <h3 class="mb-0 fw-bold h6">Publié le</h3>
+                    <p class="mb-0">{{ post.createdAt | format_datetime('full', 'none', locale='fr') | capitalize }}</p>
+                </div>
+
+                <div>
+                    <h3 class="mb-0 fw-bold h6">{{ plurial(post.categories|length, 'Catégorie', 'Catégories') }}</h3>
+                    {% for c in post.categories %}
+                        <span style="color: {{ c.color }}">{{ c.name }}</span>
+                        {% if loop.last == false %}
+                            <span class="small">/</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                {% if postsSameCategory is defined and postsSameCategory is not empty %}
+                <div class="mt-3">
+                    <h3 class="mb-0 h6 fw-bold">Dans la même catégorie</h3>
+                    <ul>
+                        {% for pc in postsSameCategory %}
+                            <li>
+                                <a href="{{ path('post.single', {slug: pc.slug}) }}">{{ pc.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </aside>
+    </div>
+
+</section>
+{% endblock %}
