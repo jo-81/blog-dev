@@ -19,7 +19,7 @@
                     <div class="card-body pb-0">
                         <div class="border-bottom pb-3">
                             {% for category in post.categories %}
-                                <a href="#" class="small badge-category" style="color: {{ category.color }}">{{ category.name }}</a>
+                                <a href="{{ path('post.list.category', {slug: category.slug}) }}" class="small badge-category" style="color: {{ category.color }}">{{ category.name }}</a>
                                 {% if loop.last == false %}
                                 <span class="small">/</span>
                                 {% endif %}
@@ -37,7 +37,7 @@
                     </div>
 
                     <footer class="card-footer">
-                        <a class="btn btn-outline-secondary text-uppercase border-0" href="#">lire l'article</a>
+                        <a class="btn btn-outline-secondary text-uppercase border-0" href="{{ path('post.single', {slug: post.slug}) }}">lire l'article</a>
                     </footer>
                 </article>
             </div>
