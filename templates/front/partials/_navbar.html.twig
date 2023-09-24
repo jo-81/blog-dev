@@ -28,6 +28,14 @@
                         "active": 'categories' in app.request.requestUri
                     }) }}" href="{{ path('category.list') }}">Catégories</a>
                 </li>
+
+                {% if app.user is null %}
+                <li class="nav-item">
+                    <a class="{{ html_classes("nav-link", {
+                        "active": 'connexion' in app.request.requestUri
+                    }) }}" href="{{ path('app_login') }}">Connexion</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
 
