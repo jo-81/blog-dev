@@ -21,20 +21,22 @@
         {% endblock %}
     </head>
 
+    {% set routesWithNavbarAndFooter = ['/', '/blog', '/categories'] %}
+
     <body class="{{ html_classes('', {
-        "vh-100" : 'exception' in app.request.attributes|keys
+        "vh-100" : not (app.request.requestUri in routesWithNavbarAndFooter)
     }) }}">
-        {% if('exception' in app.request.attributes|keys == false) %}
+        {% if (app.request.requestUri in routesWithNavbarAndFooter) %}
             {% include "front/partials/_navbar.html.twig" %}
         {% endif %}
 
         <main class="{{ html_classes('h-100', {
-            "d-flex" : 'exception' in app.request.attributes|keys
+            "d-flex" : not (app.request.requestUri in routesWithNavbarAndFooter)
         }) }}">
             {% block body %}{% endblock %}
         </main>
 
-        {% if('exception' in app.request.attributes|keys == false) %}
+        {% if(app.request.requestUri in routesWithNavbarAndFooter) %}
             {% include "front/partials/_footer.html.twig" %}
         {% endif %}
     </body>
