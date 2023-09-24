@@ -20,11 +20,22 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        {% include "front/partials/_navbar.html.twig" %}
-        <main>
+
+    <body class="{{ html_classes('', {
+        "vh-100" : 'exception' in app.request.attributes|keys
+    }) }}">
+        {% if('exception' in app.request.attributes|keys == false) %}
+            {% include "front/partials/_navbar.html.twig" %}
+        {% endif %}
+
+        <main class="{{ html_classes('h-100', {
+            "d-flex" : 'exception' in app.request.attributes|keys
+        }) }}">
             {% block body %}{% endblock %}
         </main>
-        {% include "front/partials/_footer.html.twig" %}
+
+        {% if('exception' in app.request.attributes|keys == false) %}
+            {% include "front/partials/_footer.html.twig" %}
+        {% endif %}
     </body>
 </html>
