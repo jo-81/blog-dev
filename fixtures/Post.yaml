@@ -4,11 +4,11 @@ App\Entity\Post:
     slug: "category"
     chapo: "<paragraph(2, false)>"
     content: "<text(1500)>"
-    categories: "<numberBetween(1, 20)>x @category_*"
+    categories: "<numberBetween(1, 4)>x @category_<numberBetween(2, 20)>"
 
   post{2..20}:
     title (unique): "<words(3, true)>" 
     slug (unique): "<slug()>"
     chapo: "<paragraph(2, false)>"
     content: "<text(1500)>"
-    categories: "<numberBetween(1, 20)>x @category_*"
+    categories: "<numberBetween(1, 4)>x @category_<numberBetween(2, 20)>"

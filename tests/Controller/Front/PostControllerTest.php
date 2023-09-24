@@ -4,12 +4,12 @@ namespace App\Tests\Controller\Front;
 
 use App\Entity\Post;
 use App\Repository\PostRepository;
-use Hautelook\AliceBundle\PhpUnit\RecreateDatabaseTrait;
+use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class PostControllerTest extends WebTestCase
 {
-    use RecreateDatabaseTrait;
+    use ReloadDatabaseTrait;
 
     public function testPageBlogExist(): void
     {
